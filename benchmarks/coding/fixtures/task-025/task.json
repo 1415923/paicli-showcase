@@ -1,0 +1,8 @@
+{
+  "schemaVersion":"coding-task-v1","suiteVersion":"coding-suite-v1","fixtureVersion":"fixture-v1","taskId":"task-025","cohort":"PAICLI_RUNTIME_CONTRACT","category":"CONTINUE","promptFile":"prompt.md","workspaceTemplate":"java21-maven-v1","runtimeProfile":"paicli-continue-v1","providerProtocolProfile":"deepseek-shared-v1","approvalProfile":"read-only-v1",
+  "taskConstraints":{"network":"DISABLED","maxToolCalls":24,"maxProviderTurns":24},
+  "allowedEffects":{"read":true,"write":false,"execute":false,"writePaths":[]},
+  "oracle":{"mode":"RUNTIME_CONTRACT","requiredPaths":["facts/parent-a.txt","facts/parent-b.txt","facts/child.txt"],"forbiddenPaths":[],"unchangedPaths":["facts/parent-a.txt","facts/parent-b.txt","facts/child.txt"],"requiredText":[],"forbiddenText":[],"verificationCommand":[],"requiredAnswerFacts":["alpha=17","beta=29","gamma=43"],"expectedTaskState":"COMPLETED","expectedRunState":"COMPLETED","formalResultRequired":true,"runtimeAssertions":["SAME_THREAD_CHILD_TASK","PARENT_TOOL_REPLAY_COUNT_ZERO","BOUNDED_PARENT_PROJECTION"]},
+  "runtimeInputs":{"continuationPromptFile":"continuation.md","expectedParentToolCalls":2,"expectedChildNewToolCalls":1},
+  "budgets":{"wallClockSeconds":720,"verificationSeconds":60}
+}

@@ -1,0 +1,23 @@
+{
+  "manifestSchemaVersion": 1,
+  "scenarioId": "core-java-member-discount-v1",
+  "fixtureVersion": "1",
+  "displayName": "Order pricing member discount",
+  "javaRelease": 21,
+  "baselineCommandId": "MAVEN_OFFLINE_TEST_V1",
+  "expectedBaselineTestCount": 3,
+  "expectedBaselineTreeHash": "e492c0573b916f2067e7c7f7e58e1cc5ff781c9e37226e17bb12584d6da477a7",
+  "allowedMutablePaths": [
+    "src/main/java/com/paicli/demo/order/PricingService.java"
+  ],
+  "files": [
+    {"relativePath":"pom.xml","sizeBytes":901,"sha256":"39d1e280c5d942347e5d056bd32581ace888dab4d277f046ff83ade525bf595f","role":"BUILD_DESCRIPTOR"},
+    {"relativePath":"src/main/java/com/paicli/demo/order/MoneyRules.java","sizeBytes":250,"sha256":"cf8ad835d54b0cc1507cd8e4bff552249c97c409a76ac69c570297636e83cfb4","role":"IMMUTABLE_SOURCE"},
+    {"relativePath":"src/main/java/com/paicli/demo/order/Order.java","sizeBytes":174,"sha256":"3336eecb02c6ec12ed8fa24a5fd79382a06c1e66219a2023140eae697482707a","role":"IMMUTABLE_SOURCE"},
+    {"relativePath":"src/main/java/com/paicli/demo/order/OrderLine.java","sizeBytes":411,"sha256":"c2272b590fc9c6d20ff8f90d8974ca10595d35a28ce036513002bd959ae2162c","role":"IMMUTABLE_SOURCE"},
+    {"relativePath":"src/main/java/com/paicli/demo/order/OrderSummary.java","sizeBytes":273,"sha256":"31fb8451bdee518d20cae494320cad7eb5547d811754526c62df507ee633c2b6","role":"IMMUTABLE_SOURCE"},
+    {"relativePath":"src/main/java/com/paicli/demo/order/PricingService.java","sizeBytes":297,"sha256":"e0bfdb9767fb9bd7dc8d473b47581bf0a541c0c391808eaf3293d08522c9ec9a","role":"MUTABLE_SOURCE"},
+    {"relativePath":"src/test/java/com/paicli/demo/order/OrderSummaryTest.java","sizeBytes":447,"sha256":"8117329a9fedde2cf0c951ebf89defe32d725f9e91107640e3e3d08bbb75f0d8","role":"IMMUTABLE_TEST"},
+    {"relativePath":"src/test/java/com/paicli/demo/order/PricingServiceTest.java","sizeBytes":1326,"sha256":"875f8da792e96eb7e0807f3eec7f30c56d96dc6424db2c242731c4e4be9a2534","role":"IMMUTABLE_TEST"}
+  ]
+}

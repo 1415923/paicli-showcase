@@ -1,0 +1,1 @@
+Extend the CSV user pipeline with an `active` boolean fourth column. Update UserRow, UserCsvParser, and UserFormatter so `7,Ada,admin,true` parses and formats as `Ada [admin] active`. Do not edit tests.

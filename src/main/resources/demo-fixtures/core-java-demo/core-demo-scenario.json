@@ -1,0 +1,54 @@
+{
+  "scenarioContractSchemaVersion": 1,
+  "scenarioId": "core-java-member-discount-v1",
+  "fixtureVersion": "1",
+  "fixtureManifestHash": "2688e287afaa337551dc0f58f5c085e4918d32c8eb58408cf33f27a293ca3251",
+  "fixedTaskId": "core-java-member-discount-task-v1",
+  "fixedTaskText": "Add member discount calculation to order pricing while preserving monetary rounding rules and empty-order behavior.",
+  "mutableFile": "src/main/java/com/paicli/demo/order/PricingService.java",
+  "expectedBaselineTreeHash": "e492c0573b916f2067e7c7f7e58e1cc5ff781c9e37226e17bb12584d6da477a7",
+  "expectedInitialImplementationTreeHash": "94eacb50ef6873e58072009a172e27e03fcc45d18fe00e2b50f306e294f79d8f",
+  "expectedFinalTreeHash": "49400b5195a412415e2ad9f28f1ba562759d5c48bd1ebd9f6e19ad9d43605a47",
+  "expectedFirstVerification": {
+    "tests": 3,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "failingTestClass": "com.paicli.demo.order.PricingServiceTest",
+    "failingTestName": "memberDiscountUsesRoundedSubtotal"
+  },
+  "expectedFinalVerification": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "expectedRepairAttempts": 1,
+  "expectedChangedFiles": [
+    "src/main/java/com/paicli/demo/order/PricingService.java"
+  ],
+  "expectedSnapshotMinimum": 2,
+  "expectedCodeIntelligenceFiles": [
+    "src/main/java/com/paicli/demo/order/MoneyRules.java",
+    "src/main/java/com/paicli/demo/order/PricingService.java",
+    "src/test/java/com/paicli/demo/order/PricingServiceTest.java"
+  ],
+  "expectedCodeIntelligenceSymbols": [
+    "MoneyRules",
+    "PricingService",
+    "PricingServiceTest"
+  ],
+  "expectedPrimaryPhaseSequence": [
+    "PLAN",
+    "CODE_INTELLIGENCE",
+    "EXECUTE",
+    "VERIFY",
+    "CHECKPOINT",
+    "REPAIR",
+    "VERIFY"
+  ],
+  "planContractVersion": "core-demo-plan-v1",
+  "providerScriptVersion": "core-demo-provider-v1",
+  "verificationPolicyVersion": "maven-offline-test-v1",
+  "approvalProfileVersion": "core-demo-approval-v1"
+}

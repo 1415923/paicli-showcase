@@ -1,0 +1,15 @@
+package com.paicli.codeintelligence;
+
+public enum CallSiteEvidence {
+    METHOD_NAME_MATCH,
+    ARGUMENT_ARITY_MATCH,
+    SAME_CLASS_UNQUALIFIED_CALL,
+    STATIC_CLASS_SCOPE_MATCH,
+    IMPORT_MATCH,
+    PACKAGE_MATCH,
+    UNKNOWN_RECEIVER,
+    OVERLOAD_AMBIGUOUS,
+    CLASS_AMBIGUOUS,
+    STALE_INDEX,
+    PARSE_ERROR
+}

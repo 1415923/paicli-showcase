@@ -1,0 +1,1 @@
+Add status updates to the ticket model and store. A stored ticket starts OPEN; updateStatus(id, CLOSED) replaces its status while preserving id/title and returns false for an unknown id. Modify only production files.

@@ -1,0 +1,1 @@
+Implement Slugifier.slug so it trims input, lowercases with Locale.ROOT, replaces each run of non-alphanumeric characters with one hyphen, and removes leading/trailing hyphens. Modify only Slugifier.java and run tests.

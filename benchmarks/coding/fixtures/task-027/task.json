@@ -1,0 +1,8 @@
+{
+  "schemaVersion":"coding-task-v1","suiteVersion":"coding-suite-v1","fixtureVersion":"fixture-v1","taskId":"task-027","cohort":"PAICLI_RUNTIME_CONTRACT","category":"COMPACT","promptFile":"prompt.md","workspaceTemplate":"java21-maven-v1","runtimeProfile":"paicli-compact-v1","providerProtocolProfile":"deepseek-shared-v1","approvalProfile":"read-only-v1",
+  "taskConstraints":{"network":"DISABLED","maxToolCalls":30,"maxProviderTurns":30},
+  "allowedEffects":{"read":true,"write":false,"execute":false,"writePaths":[]},
+  "oracle":{"mode":"RUNTIME_CONTRACT","requiredPaths":["facts/catalog.txt"],"forbiddenPaths":[],"unchangedPaths":["facts/catalog.txt"],"requiredText":[],"forbiddenText":[],"verificationCommand":[],"requiredAnswerFacts":["item-01=amber","item-07=violet"],"expectedTaskState":"COMPLETED","expectedRunState":"COMPLETED","formalResultRequired":true,"runtimeAssertions":["COMPACT_COUNT_AT_LEAST_ONE","CONTEXT_SOURCE_CLOSURE_VALID","TOOL_REPLAY_COUNT_ZERO"]},
+  "runtimeInputs":{"observationFile":"facts/catalog.txt","minimumObservationBytes":6000,"forceCompactSafePoint":true},
+  "budgets":{"wallClockSeconds":900,"verificationSeconds":60}
+}

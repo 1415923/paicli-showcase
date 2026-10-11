@@ -1,0 +1,31 @@
+I have all the browser evidence needed. Let me compile the findings from the completed inspection.
+
+## Findings from http://127.0.0.1:18797
+
+### Invoice/customer/amount displayed
+After applying filter **INV-2047**, the page's status region (uid 2_0) displayed:
+
+**`INV-2047 | Northwind Demo | 83`**
+
+- **Invoice:** INV-2047
+- **Customer name/account:** Northwind Demo
+- **Amount:** 83
+
+### Failed API request & HTTP status
+From the network request log (page 2):
+
+- **GET http://127.0.0.1:18797/api/risk-check?invoice=INV-2047 → [503]** (Service Unavailable)
+
+The invoice search itself (`GET /api/invoices?filter=INV-2047`) succeeded with **[200]**. Only the risk-check companion API failed.
+
+### Console evidence
+Console messages (page 2) showed two error entries corroborating the failure:
+
+- `[error] Failed to load resource: the server responded with a status of 503 (Service Unavailable)`
+- `[error] RISK_CHECK_UNAVAILABLE status=503` (signature that the application explicitly caught/logged the risk-check service being down)
+
+This confirms the failure is a **server-side unavailability** of the risk-check service — not a client-side parsing or network issue. The invoice data is valid (fetch returned 200 and rendered), so the 503 is isolated to the `/api/risk-check` endpoint.
+
+### Checks I could not complete
+- **Risk-check result for INV-2047**: Could not be retrieved/reported because the `/api/risk-check` endpoint returns 503 and the UI surface doesn't expose any risk result on the page (the snapshot only contains the invoice line). The risk assessment status therefore remains **unknown/unavailable**.
+- No further validation was performed, as instructed (no reading page/server source, no `run_command`).

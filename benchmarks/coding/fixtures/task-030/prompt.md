@@ -1,0 +1,1 @@
+Copy the exact line from `input/status-source.txt` into `output/status.txt`. The harness will interrupt the write after durable STARTED admission and make its outcome unknown; recovery must not blindly replay the write.

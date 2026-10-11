@@ -1,0 +1,8 @@
+{
+  "schemaVersion":"coding-task-v1","suiteVersion":"coding-suite-v1","fixtureVersion":"fixture-v1","taskId":"task-029","cohort":"PAICLI_RUNTIME_CONTRACT","category":"RECOVERY","promptFile":"prompt.md","workspaceTemplate":"java21-maven-v1","runtimeProfile":"paicli-recovery-v1","providerProtocolProfile":"deepseek-shared-v1","approvalProfile":"read-only-v1",
+  "taskConstraints":{"network":"DISABLED","maxToolCalls":18,"maxProviderTurns":18},
+  "allowedEffects":{"read":true,"write":false,"execute":false,"writePaths":[]},
+  "oracle":{"mode":"RUNTIME_CONTRACT","requiredPaths":["facts/recover.txt"],"forbiddenPaths":[],"unchangedPaths":["facts/recover.txt"],"requiredText":[],"forbiddenText":[],"verificationCommand":[],"requiredAnswerFacts":["recovered-value=71"],"expectedTaskState":"COMPLETED","expectedRunState":"COMPLETED","formalResultRequired":true,"runtimeAssertions":["LOGICAL_TURN_IDENTITY_STABLE","RETRY_WINDOW_EFFECT_COUNT_ZERO","FORMAL_RESULT_SINGLE"]},
+  "runtimeInputs":{"faultProfile":"PROVIDER_503_ON_FIRST_ATTEMPT","expectedProviderAttempts":2,"expectedToolCalls":1},
+  "budgets":{"wallClockSeconds":720,"verificationSeconds":60}
+}

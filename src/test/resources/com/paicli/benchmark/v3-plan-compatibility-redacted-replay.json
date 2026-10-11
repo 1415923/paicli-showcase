@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "v3-plan-compatibility-redacted-replay-v1",
+  "provenance": "TRACE_DERIVED_SCHEMA_SIGNATURE_NOT_ORIGINAL_PROVIDER_CONTENT",
+  "rootCauseClassification": "MODEL_PLAN_QUALITY_FAILURE",
+  "initialPayload": {
+    "acceptanceCriteria": ["placeholder fixture inspection is complete"],
+    "assumptions": [],
+    "risks": [],
+    "verificationStrategy": "inspect the typed result",
+    "steps": [
+      {
+        "title": "Inspect placeholder",
+        "definition": "Read one non-sensitive fixture path",
+        "dependsOn": [],
+        "completionRule": "ALL_REQUIRED_EVIDENCE",
+        "requiredEvidenceKinds": ["TOOL_CALL"],
+        "effectClass": "READ",
+        "toolRequirements": [
+          {
+            "requirementId": "inspect-placeholder",
+            "requirementOrder": 0,
+            "toolName": "read_file",
+            "effectClass": "READ",
+            "authoritySelector": {
+              "kind": "EXACT_PATH",
+              "path": "src/main/java/fixture/Placeholder.java",
+              "recursive": true
+            },
+            "minSuccesses": 1,
+            "maxOccurrences": 1,
+            "freshnessPolicy": "RESUME_REUSE_ONLY"
+          }
+        ]
+      }
+    ]
+  },
+  "repairPayload": {
+    "acceptanceCriteria": ["placeholder fixture inspection is complete"],
+    "assumptions": [],
+    "risks": [],
+    "verificationStrategy": "inspect the typed result",
+    "steps": [
+      {
+        "title": "Inspect placeholder",
+        "definition": "Read one non-sensitive fixture path",
+        "dependsOn": [],
+        "completionRule": "ALL_REQUIRED_EVIDENCE",
+        "requiredEvidenceKinds": ["TOOL_CALL"],
+        "effectClass": "READ",
+        "toolRequirements": [
+          {
+            "requirementId": "inspect-placeholder",
+            "requirementOrder": 0,
+            "toolName": "read_file",
+            "effectClass": "READ",
+            "authoritySelector": {
+              "kind": "EXACT_PATH",
+              "recursive": true
+            },
+            "minSuccesses": 1,
+            "maxOccurrences": 1,
+            "freshnessPolicy": "RESUME_REUSE_ONLY"
+          }
+        ]
+      }
+    ]
+  }
+}

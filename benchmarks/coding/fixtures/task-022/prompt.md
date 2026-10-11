@@ -1,0 +1,1 @@
+QuotedList.render should emit a JSON-style string array, escaping backslashes and quotes and returning [] for an empty list. Use the failing tests to implement and verify the behavior; repair if necessary. Do not edit tests.

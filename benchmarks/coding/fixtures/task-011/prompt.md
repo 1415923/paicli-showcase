@@ -1,0 +1,1 @@
+Add membership-aware discounts across the policy interface, implementation, and checkout service. Members receive 10% off, non-members receive no discount, and totals cannot become negative. Do not edit tests.

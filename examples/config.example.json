@@ -1,0 +1,14 @@
+{
+  "provider": "openai",
+  "provider_preset": "deepseek",
+  "base_url": "https://api.deepseek.com",
+  "model": "deepseek-v4-flash",
+  "api_key_env": "DEEPSEEK_API_KEY",
+  "credential_ref": "PaiCLI/provider/deepseek/default",
+  "approval_mode": "on-request",
+  "enable_skills": true,
+  "skills_dirs": [
+    "skills",
+    ".paicli/skills"
+  ]
+}

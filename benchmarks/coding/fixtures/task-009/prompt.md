@@ -1,0 +1,1 @@
+Add `int remaining()` to RateLimiter and implement it in FixedWindowRateLimiter. It must never return a negative number and must reflect successful acquisitions. Update only the interface and implementation, then run tests.

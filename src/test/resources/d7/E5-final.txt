@@ -1,0 +1,50 @@
+I have already gathered all the necessary evidence through the Chrome MCP tools. Let me compile the report.
+
+Based on the tool results across the completed browser interactions, here is the full set of evidence:
+
+**Navigation:** Page 2 at `http://127.0.0.1:18797/` (page snapshot title "D7 invoice filter", heading "Invoice search").
+
+**Interaction performed:**
+- Filled the filter textbox (uid `1_3`) with `INV-2047` and clicked the "Apply" button (uid `1_4`).
+
+**Page state after filtering** (element uid `1_5` status region / `2_0`):
+> `INV-2047 | Northwind Demo | 83`
+
+Parsed as: invoice `INV-2047`, customer `Northwind Demo`, amount `83`.
+
+**Console messages:**
+- `msgid=1 [error] Failed to load resource: the server responded with a status of 503 (Service Unavailable)`
+- `msgid=2 [error] RISK_CHECK_UNAVAILABLE status=503`
+
+**Network requests:**
+- `GET http://127.0.0.1:18797/` → 200
+- `GET http://127.0.0.1:18797/favicon.ico` → 200
+- `GET http://127.0.0.1:18797/api/invoices?filter=INV-2047` → 200
+- `GET http://127.0.0.1:18797/api/risk-check?invoice=INV-2047` → **503 Service Unavailable** (failed)
+
+---
+
+## Browser regression report
+
+- **Target and requested behavior:** Open `http://127.0.0.1:18797`, apply the invoice filter `INV-2047`, and report the displayed invoice/customer/amount plus any failed API request with its HTTP status and console evidence.
+
+- **Page state before / after:** Before filtering, the status region showed "No filter applied". After entering `INV-2047` and clicking Apply, the result region displayed **`INV-2047 | Northwind Demo | 83`** — invoice **INV-2047**, customer **Northwind Demo**, amount **83**.
+
+- **Interaction and observed result:** Filter applied successfully; the invoice result rendered correctly in the page.
+
+- **Console errors:**
+  - `[error] Failed to load resource: the server responded with a status of 503 (Service Unavailable)`
+  - `[error] RISK_CHECK_UNAVAILABLE status=503`
+
+- **Failed network requests, including URL and status:** The invoice list API succeeded (`GET /api/invoices?filter=INV-2047` → 200), but a secondary call failed:
+  - `GET http://127.0.0.1:18797/api/risk-check?invoice=INV-2047` → **503 Service Unavailable**
+
+- **Diagnosis (from browser evidence):** After the filter succeeded, the page issued a risk-check request for invoice `INV-2047`, and that risk-check endpoint returned **HTTP 503**. The browser console correlated this with `RISK_CHECK_UNAVAILABLE status=503`. The primary invoice filter/search behavior completed successfully.
+
+- **Result: FAILED (partially)** — the invoice display worked, but the risk-check API request failed. Checks actually performed via browser evidence:
+  - ✅ Page load (`/` → 200)
+  - ✅ Filter apply and displayed result (INV-2047 / Northwind Demo / 83)
+  - ✅ Console inspection (captured the two errors above)
+  - ✅ Network inspection (`/api/risk-check?invoice=INV-2047` → 503)
+
+- **Checks that could not be completed / missing check:** The **risk-check assessment value** was not obtained because the `/api/risk-check` endpoint returned 503 and no fallback message was offered by the page; thus no risk status could be reported. (Diagnosing *why* the service returned 503 — e.g., backend/dependency outage — is outside the browser scope and was not done, per the instruction not to inspect page/server source.)

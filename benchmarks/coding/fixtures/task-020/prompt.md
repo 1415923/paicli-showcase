@@ -1,0 +1,1 @@
+The RetrySchedule tests expose incorrect exponential backoff. Locate the bug, implement delays 100, 200, 400, ... milliseconds capped at 1600, run the tests, and repair the implementation if verification fails. Do not edit tests.

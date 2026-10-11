@@ -1,0 +1,114 @@
+package com.paicli.benchmark;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.util.HexFormat;
+import java.util.Map;
+import java.util.TreeMap;
+
+/** Candidate/artifact/harness admission checks that must run before Provider construction. */
+final class FinalSourceAuthority {
+    static final String COMMIT = "000318ebc36904249520161831f98112402f567d";
+    static final String SRC_MAIN_TREE = "26eba5343b859b7f3c41f8462702d6f30e5a1c99";
+    static final String ARTIFACT_KIND = "MAVEN_TARGET_CLASSES_TREE_SHA256_V1";
+    private static final ObjectMapper JSON = new ObjectMapper();
+
+    private FinalSourceAuthority() {}
+
+    static JsonNode verify(Path project, Path authorityPath, Path artifactPath,
+            Path overlayPath) throws Exception {
+        JsonNode authority = JSON.readTree(authorityPath.toFile());
+        JsonNode artifact = JSON.readTree(artifactPath.toFile());
+        JsonNode overlay = JSON.readTree(overlayPath.toFile());
+        require("formal-final-source-provider-gate-v1".equals(
+                authority.path("schemaVersion").asText()), "gate schema drift");
+        require("final-source-internal-controlled-regression-v1".equals(
+                authority.path("campaignIdentity").asText()), "campaign identity drift");
+        require("formal-final-source-result-v1".equals(
+                authority.path("resultIdentity").asText()), "result identity drift");
+        require(COMMIT.equals(authority.path("candidateCommit").asText()),
+                "Candidate commit drift");
+        require(SRC_MAIN_TREE.equals(authority.path("candidateSrcMainTree").asText()),
+                "Candidate src/main tree drift");
+        require(ARTIFACT_KIND.equals(artifact.path("artifactKind").asText()),
+                "artifact kind drift");
+        require(COMMIT.equals(artifact.path("artifactSourceCommit").asText()),
+                "artifact source commit drift");
+        require(SRC_MAIN_TREE.equals(artifact.path("artifactSrcMainTree").asText()),
+                "artifact source tree drift");
+        require(artifact.path("providerCallsBeforeFreeze").asInt(-1) == 0,
+                "artifact was not frozen before Provider admission");
+
+        String actualArtifact = treeDigest(project.resolve("target/classes"));
+        require(actualArtifact.equals(artifact.path("artifactSha256").asText()),
+                "target/classes artifact drift");
+        require(actualArtifact.equals(authority.path("artifactSha256").asText()),
+                "gate/artifact SHA disagreement");
+
+        require("final-source-harness-overlay-v1".equals(
+                overlay.path("schemaVersion").asText()), "overlay schema drift");
+        TreeMap<String, String> actualFiles = new TreeMap<>();
+        overlay.path("files").fields().forEachRemaining(entry -> {
+            try {
+                Path file = project.resolve(entry.getKey()).normalize();
+                require(file.startsWith(project) && Files.isRegularFile(file)
+                                && !Files.isSymbolicLink(file),
+                        "overlay file is missing or escaped: " + entry.getKey());
+                String actual = sha256(file);
+                require(actual.equals(entry.getValue().asText()),
+                        "overlay content drift: " + entry.getKey());
+                actualFiles.put(entry.getKey().replace('\\', '/'), actual);
+            } catch (Exception error) {
+                throw new AuthorityRuntimeException(error);
+            }
+        });
+        TreeMap<String, Object> material = new TreeMap<>();
+        material.put("files", actualFiles);
+        material.put("schemaVersion", "final-source-harness-overlay-v1");
+        String identity = "final-source-harness-v1-" + sha256(
+                JSON.writeValueAsBytes(material));
+        require(identity.equals(overlay.path("harnessIdentity").asText()),
+                "aggregate harness identity drift");
+        require(identity.equals(authority.path("harnessIdentity").asText()),
+                "gate/harness identity disagreement");
+        require(identity.equals(artifact.path("harnessIdentity").asText()),
+                "artifact/harness identity disagreement");
+        return authority;
+    }
+
+    static String treeDigest(Path root) throws Exception {
+        require(Files.isDirectory(root), "target/classes is missing");
+        TreeMap<String, String> files = new TreeMap<>();
+        try (var stream = Files.walk(root)) {
+            for (Path path : stream.sorted().toList()) {
+                if (Files.isSymbolicLink(path))
+                    throw new IllegalStateException("artifact symlink rejected");
+                if (Files.isRegularFile(path))
+                    files.put(root.relativize(path).toString().replace('\\', '/'),
+                            sha256(path));
+            }
+        }
+        return sha256(JSON.writeValueAsBytes(files));
+    }
+
+    private static String sha256(Path path) throws Exception {
+        return sha256(Files.readAllBytes(path));
+    }
+
+    private static String sha256(byte[] value) throws Exception {
+        return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(value));
+    }
+
+    private static void require(boolean condition, String message) {
+        if (!condition) throw new IllegalStateException(message);
+    }
+
+    private static final class AuthorityRuntimeException extends RuntimeException {
+        private AuthorityRuntimeException(Exception cause) { super(cause); }
+    }
+}

@@ -1,0 +1,13 @@
+#!/bin/sh
+set -eu
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+JAR="$SCRIPT_DIR/../lib/paicli-1.2.0.jar"
+if [ ! -f "$JAR" ]; then
+  printf '%s\n' 'PaiCLI launcher error: distribution JAR not found.' >&2
+  exit 2
+fi
+if ! command -v java >/dev/null 2>&1; then
+  printf '%s\n' 'PaiCLI launcher error: Java 21 is not available on PATH.' >&2
+  exit 2
+fi
+exec java -jar "$JAR" "$@"

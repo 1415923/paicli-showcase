@@ -1,0 +1,1 @@
+Fix ExpiringValue.isExpired according to its failing boundary tests: a value expires exactly at the deadline, negative TTL is rejected, and overflow must not make a value appear unexpired. Verify and repair as needed without editing tests.

@@ -1,0 +1,7 @@
+{
+  "schemaVersion":"coding-task-v1","suiteVersion":"coding-suite-v1","fixtureVersion":"fixture-v1","taskId":"task-022","cohort":"COMMON_PAIRED","category":"VERIFY_REPAIR","promptFile":"prompt.md","workspaceTemplate":"java21-maven-v1","runtimeProfile":"common-verify-v1","providerProtocolProfile":"deepseek-shared-v1","approvalProfile":"workspace-write-v1",
+  "taskConstraints":{"network":"DISABLED","maxToolCalls":28,"maxProviderTurns":26},
+  "allowedEffects":{"read":true,"write":true,"execute":true,"writePaths":["src/main/java/fixture/QuotedList.java"]},
+  "oracle":{"mode":"EDIT","requiredPaths":["src/main/java/fixture/QuotedList.java"],"forbiddenPaths":[],"unchangedPaths":["src/test/java/fixture/QuotedListTest.java"],"requiredText":[],"forbiddenText":[],"verificationCommand":["mvn","-q","-o","test"],"requiredAnswerFacts":[],"expectedTaskState":"COMPLETED","expectedRunState":"COMPLETED","formalResultRequired":true},
+  "budgets":{"wallClockSeconds":720,"verificationSeconds":120}
+}

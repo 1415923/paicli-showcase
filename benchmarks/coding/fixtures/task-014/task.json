@@ -1,0 +1,7 @@
+{
+  "schemaVersion":"coding-task-v1","suiteVersion":"coding-suite-v1","fixtureVersion":"fixture-v1","taskId":"task-014","cohort":"COMMON_PAIRED","category":"REFACTOR","promptFile":"prompt.md","workspaceTemplate":"java21-maven-v1","runtimeProfile":"common-edit-v1","providerProtocolProfile":"deepseek-shared-v1","approvalProfile":"workspace-write-v1",
+  "taskConstraints":{"network":"DISABLED","maxToolCalls":22,"maxProviderTurns":22},
+  "allowedEffects":{"read":true,"write":true,"execute":true,"writePaths":["src/main/java/fixture/PriceCalculator.java"]},
+  "oracle":{"mode":"EDIT","requiredPaths":["src/main/java/fixture/PriceCalculator.java"],"forbiddenPaths":[],"unchangedPaths":["src/test/java/fixture/PriceCalculatorTest.java"],"requiredText":[{"path":"src/main/java/fixture/PriceCalculator.java","text":"shipping"}],"forbiddenText":[],"verificationCommand":["mvn","-q","-o","test"],"requiredAnswerFacts":[],"expectedTaskState":"COMPLETED","expectedRunState":"COMPLETED","formalResultRequired":true},
+  "budgets":{"wallClockSeconds":600,"verificationSeconds":120}
+}

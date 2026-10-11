@@ -1,0 +1,7 @@
+{
+  "schemaVersion":"coding-task-v1","suiteVersion":"coding-suite-v1","fixtureVersion":"fixture-v1","taskId":"task-002","cohort":"COMMON_PAIRED","category":"READ","promptFile":"prompt.md","workspaceTemplate":"java21-maven-v1","runtimeProfile":"common-read-v1","providerProtocolProfile":"deepseek-shared-v1","approvalProfile":"read-only-v1",
+  "taskConstraints":{"network":"DISABLED","maxToolCalls":12,"maxProviderTurns":12},
+  "allowedEffects":{"read":true,"write":false,"execute":false,"writePaths":[]},
+  "oracle":{"mode":"READ_ONLY","requiredPaths":["src/main/java/fixture/OrderState.java"],"forbiddenPaths":[],"unchangedPaths":["src/main/java/fixture/OrderState.java"],"requiredText":[],"forbiddenText":[],"verificationCommand":[],"requiredAnswerFacts":["CREATED","PAID","SHIPPED","CANCELLED"],"expectedTaskState":"COMPLETED","expectedRunState":"COMPLETED","formalResultRequired":true},
+  "budgets":{"wallClockSeconds":300,"verificationSeconds":30}
+}

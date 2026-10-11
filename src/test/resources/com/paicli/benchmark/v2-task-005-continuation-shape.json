@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "sanitized-provider-trace-shape-v1",
+  "sourceAttempt": "authorization-attempt-v2-shortpath-20260809-02",
+  "sourceRun": "calibration-result-v2/01/task-005/PAICLI",
+  "containsProviderPrivateContent": false,
+  "turns": [
+    {
+      "assistantToolCallIds": ["trace-call-a", "trace-call-b"],
+      "toolResultIds": ["trace-call-a", "trace-call-b"]
+    },
+    {
+      "assistantToolCallIds": ["trace-call-c"],
+      "toolResultIds": ["trace-call-c"]
+    }
+  ],
+  "expectedNextContinuation": "NETWORK_REQUEST_SENT"
+}

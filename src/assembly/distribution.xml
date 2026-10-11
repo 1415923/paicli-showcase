@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0 https://maven.apache.org/xsd/assembly-2.2.0.xsd">
+    <id>distribution</id>
+    <formats>
+        <format>dir</format>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <files>
+        <file>
+            <source>${project.build.directory}/${project.build.finalName}.jar</source>
+            <outputDirectory>lib</outputDirectory>
+            <destName>paicli-${project.version}.jar</destName>
+            <fileMode>0644</fileMode>
+        </file>
+        <file>
+            <source>src/dist/README.md</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>README.md</destName>
+            <fileMode>0644</fileMode>
+        </file>
+        <file>
+            <source>src/dist/bin/paicli</source>
+            <outputDirectory>bin</outputDirectory>
+            <destName>paicli</destName>
+            <fileMode>0755</fileMode>
+            <lineEnding>unix</lineEnding>
+        </file>
+        <file>
+            <source>src/dist/bin/paicli.cmd</source>
+            <outputDirectory>bin</outputDirectory>
+            <destName>paicli.cmd</destName>
+            <fileMode>0644</fileMode>
+            <lineEnding>dos</lineEnding>
+        </file>
+        <file>
+            <source>src/dist/bin/paicli.ps1</source>
+            <outputDirectory>bin</outputDirectory>
+            <destName>paicli.ps1</destName>
+            <fileMode>0644</fileMode>
+            <lineEnding>dos</lineEnding>
+        </file>
+    </files>
+</assembly>

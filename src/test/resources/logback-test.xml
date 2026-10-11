@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Tests must never inherit the production ${user.home}/.paicli/logs sink. -->
+    <root level="OFF"/>
+</configuration>
